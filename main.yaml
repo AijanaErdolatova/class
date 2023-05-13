@@ -1,0 +1,19 @@
+- hosts: webserver
+  vars: 
+    php_version: 74
+  tasks: 
+  - name: Install Apache
+    include: apache.yaml
+
+  - name: Install Packages
+    include: packages.yaml
+
+  - name: Intasll PHP
+    include: php.yaml
+
+  - name: Install Wordpress
+    include: wordpress.yaml
+  
+  - name: Enable Database
+    include: db.yaml
+      
