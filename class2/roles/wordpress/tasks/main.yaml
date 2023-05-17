@@ -1,0 +1,28 @@
+- name: Download wordpress
+  get_url: "{{ wordpress_url }}"
+    url: 
+    dest: /tmp/wordpress.tar.gz
+
+- name: Extract wordpress
+  unarchive: 
+    src: "{{ folder }}"
+    dest: /tmp
+    remote_src: yes
+    creates: /tmp/wordpress
+
+
+
+- name: Copy file with owner and permissions
+  copy:
+    src: "/tmp/wordpress/."
+    dest: /var/www/html
+    owner: apache
+    group: apache
+    mode: '0755'
+    remote_src: yes
+
+- name: Restart Apache
+  service: 
+    name: httpd
+    state: restarted
+ 
